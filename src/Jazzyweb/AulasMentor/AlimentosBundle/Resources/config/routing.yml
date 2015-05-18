@@ -21,3 +21,7 @@ JAMAB_buscar:
 JAMAB_ver:
   pattern:  /ver/{id}
   defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:ver }
+  
+JAMAB_testinfosender:
+  pattern:  /testinfosender
+  defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:testInfoSender }

@@ -3,8 +3,6 @@
 namespace Jazzyweb\AulasMentor\AlimentosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Jazzyweb\AulasMentor\AlimentosBundle\Model\Model;
-use Jazzyweb\AulasMentor\AlimentosBundle\Config\Config;
 
 class DefaultController extends Controller {
 
@@ -20,7 +18,7 @@ class DefaultController extends Controller {
     }
 
     public function listarAction() {
-        $m = new Model(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario, Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $m = $this->get('jamab.model');
 
         $params = array(
             'alimentos' => $m->dameAlimentos(),
@@ -42,7 +40,7 @@ class DefaultController extends Controller {
             'grasa' => '',
         );
 
-        $m = new Model(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario, Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $m = $this->get('jamab.model');
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -75,7 +73,7 @@ class DefaultController extends Controller {
             'resultado' => array(),
         );
 
-        $m = new Model(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario, Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $m = $this->get('jamab.model');
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $params['nombre'] = $_POST['nombre'];
@@ -89,7 +87,7 @@ class DefaultController extends Controller {
     }
 
     public function verAction($id) {
-        $m = new Model(Config::$mvc_bd_nombre, Config::$mvc_bd_usuario, Config::$mvc_bd_clave, Config::$mvc_bd_hostname);
+        $m = $this->get('jamab.model');
 
         $alimento = $m->dameAlimento($id);
 
@@ -102,6 +100,16 @@ class DefaultController extends Controller {
         return $this->render(
             'JazzywebAulasMentorAlimentosBundle:Default:verAlimento.html.twig', $params
         );
+    }
+    
+    public function testInfoSenderAction(){
+        $infosender = $this->get('jamab.infosender');
+
+      $infosender->send('%manzana%', 'hansell.ramos@gmail.com');
+
+      return new \Symfony\Component\HttpFoundation\Response(
+              '<html><body><h2>Se ha enviado información a
+              juandalibaba@gmail.com</h2></body></html>');
     }
 
 }
