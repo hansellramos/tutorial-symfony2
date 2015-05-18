@@ -1,3 +1,23 @@
-jazzyweb_aulas_mentor_alimentos_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:index }
+#jazzyweb_aulas_mentor_alimentos_homepage:
+#    path:     /hello/{name}
+#    defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:index }
+
+JAMAB_homepage:
+ pattern:  /
+ defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:index }
+
+JAMAB_listar:
+  pattern:  /listar
+  defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:listar }
+
+JAMAB_insertar:
+  pattern:  /insertar
+  defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:insertar }
+
+JAMAB_buscar:
+  pattern:  /buscar
+  defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:buscarPorNombre }
+
+JAMAB_ver:
+  pattern:  /ver/{id}
+  defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:ver }

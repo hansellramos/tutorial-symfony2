@@ -1,6 +1,6 @@
 jazzyweb_aulas_mentor_alimentos:
     resource: "@JazzywebAulasMentorAlimentosBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /alimentos
 
 app:
     resource: "@AppBundle/Controller/"
