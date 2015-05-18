@@ -1,0 +1,3 @@
+jazzyweb_aulas_mentor_alimentos_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: JazzywebAulasMentorAlimentosBundle:Default:index }
