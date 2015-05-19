@@ -1,4 +1,4 @@
-jazzyweb_aulas_mentor_notas_backend:
+JAMNotasBackendBundle:
     resource: "@JazzywebAulasMentorNotasBackendBundle/Resources/config/routing.yml"
     prefix:   /
 
