@@ -1,4 +1,8 @@
-jazzyweb_aulas_mentor_alimentos:
+JAMNotasFrontendBundle:
+    resource: "@JazzywebAulasMentorNotasFrontendBundle/Resources/config/routing.yml"
+    prefix:   /
+
+jamab_alimentos:
     resource: "@JazzywebAulasMentorAlimentosBundle/Resources/config/routing.yml"
     prefix:   /alimentos
 

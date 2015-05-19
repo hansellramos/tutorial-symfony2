@@ -1,0 +1,3 @@
+jazzyweb_aulas_mentor_notas_frontend_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: JazzywebAulasMentorNotasFrontendBundle:Default:index }
