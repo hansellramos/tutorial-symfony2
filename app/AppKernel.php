@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Jazzyweb\AulasMentor\AlimentosBundle\JazzywebAulasMentorAlimentosBundle(),
             new Jazzyweb\AulasMentor\NotasFrontendBundle\JazzywebAulasMentorNotasFrontendBundle(),
+            new Jazzyweb\AulasMentor\NotasBackendBundle\JazzywebAulasMentorNotasBackendBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
