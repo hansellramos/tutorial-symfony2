@@ -38,7 +38,7 @@ class NotasController extends Controller {
 
         list($etiquetas, $notas, $nota_seleccionada) = $this->dameEtiquetasYNotas();
 
-        return $this->render('JAMNotasFrontendBundle:Notas:index.html.twig', array(
+        return $this->render('JazzywebAulasMentorNotasFrontendBundle:Notas:index.html.twig', array(
                     'etiquetas' => $etiquetas,
                     'notas' => $notas,
                     'nota_seleccionada' => $nota_seleccionada,
@@ -64,7 +64,7 @@ class NotasController extends Controller {
 
         list($etiquetas, $notas, $nota_seleccionada) = $this->dameEtiquetasYNotas();
 
-        return $this->render('JAMNotasFrontendBundle:Notas:nueva.html.twig', array(
+        return $this->render('JazzywebAulasMentorNotasFrontendBundle:Notas:nueva.html.twig', array(
                     'etiquetas' => $etiquetas,
                     'notas' => $notas,
                     'nota_seleccionada' => $nota_seleccionada,
@@ -102,7 +102,7 @@ class NotasController extends Controller {
 
         list($etiquetas, $notas, $nota_seleccionada) = $this->dameEtiquetasYNotas();
 
-        return $this->render('JAMNotasFrontendBundle:Notas:editar.html.twig', array(
+        return $this->render('JazzywebAulasMentorNotasFrontendBundle:Notas:editar.html.twig', array(
                     'etiquetas' => $etiquetas,
                     'notas' => $notas,
                     'nota_a_editar' => $nota,
@@ -121,7 +121,7 @@ class NotasController extends Controller {
 
         $session->set('nota.seleccionada.id', '');
 
-        return $this->forward('JAMNotasFrontendBundle:Notas:index');
+        return $this->forward('JazzywebAulasMentorNotasFrontendBundle:Notas:index');
     }
 
     public function miEspacioAction() 
@@ -130,7 +130,7 @@ class NotasController extends Controller {
         return
                         $this
                         ->render(
-                                'JAMNotasFrontendBundle:Notas:index', array('params' => $params)
+                                'JazzywebAulasMentorNotasFrontendBundle:Notas:index', array('params' => $params)
         );
     }
 
