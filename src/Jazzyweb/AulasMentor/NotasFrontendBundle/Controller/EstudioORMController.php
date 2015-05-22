@@ -43,5 +43,55 @@ class EstudioORMController extends Controller
 
         return $this->render('JazzywebAulasMentorNotasFrontendBundle:EstudioORM:crear.html.twig', array('notas' => $notas));
     }
+    
+    public function recuperarAction() 
+    {
+        $id = $this->getRequest()->get('id');
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $nota = $em->getRepository('JazzywebAulasMentorNotasFrontendBundle:Nota')->find($id);
+        if (!$nota) {
+            throw $this->createNotFoundException('No existe nota con id ' . $id);
+        }
+
+
+        return $this->render('JazzywebAulasMentorNotasFrontendBundle:EstudioORM:recuperar.html.twig', array('nota' => $nota));
+    }
+    
+    public function recuperarNotasAction() 
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $notas = $em->getRepository('JazzywebAulasMentorNotasFrontendBundle:Nota')->findAll();
+        if (!$notas) {
+            throw $this->createNotFoundException('No existen notas');
+        }
+
+        return
+            $this->render('JazzywebAulasMentorNotasFrontendBundle:EstudioORM:recuperarNotas.html.twig', 
+            array('notas' => $notas)
+        );
+    }
+    
+    public function dqlAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        // Todas la notas usando DQL
+        $query = $em
+            ->createQuery("SELECT n 
+                    FROM JazzywebAulasMentorNotasFrontendBundle:Nota n 
+                        JOIN n.usuario u
+                        JOIN  n.etiquetas e
+                    WHERE e.texto = :texto AND u.username=:username")
+             ->setParameters(array('texto' => 'javascript', 'username' => 'hansell.ramos'));
+        
+        $notasTodas = $query->getResult();
+        
+        return $this->render(
+           'JazzywebAulasMentorNotasFrontendBundle:EstudioORM:recuperarNotas.html.twig',
+           array('notas' => $notasTodas)
+         );
+    }
 
 }

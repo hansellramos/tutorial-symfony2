@@ -1,6 +1,18 @@
 JAMN_ORM_crear:
  pattern:  /estudio_orm/crear
  defaults: { _controller: JazzywebAulasMentorNotasFrontendBundle:EstudioORM:crear }
+ 
+JAMN_ORM_recuperar:
+ pattern:  /estudio_orm/recuperar/{id}
+ defaults: { _controller: JazzywebAulasMentorNotasFrontendBundle:EstudioORM:recuperar } 
+ 
+JAMN_ORM_recuperar_notas:
+ pattern:  /estudio_orm/recuperar_notas
+ defaults: { _controller: JazzywebAulasMentorNotasFrontendBundle:EstudioORM:recuperarNotas }
+ 
+JAMN_ORM_DQL:
+ pattern:  /estudio_orm/dql
+ defaults: { _controller: JazzywebAulasMentorNotasFrontendBundle:EstudioORM:dql }
 
 jamn_homepage:
      pattern:  /

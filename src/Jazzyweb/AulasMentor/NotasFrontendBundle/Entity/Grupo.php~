@@ -102,37 +102,4 @@ class Grupo
     {
         return $this->rol;
     }
-
-    /**
-     * Add usuarios
-     *
-     * @param \Jazzyweb\AulasMentor\NotasFrontendBundle\Entity\Usuario $usuarios
-     * @return Grupo
-     */
-    public function addUsuario(\Jazzyweb\AulasMentor\NotasFrontendBundle\Entity\Usuario $usuarios)
-    {
-        $this->usuarios[] = $usuarios;
-
-        return $this;
-    }
-
-    /**
-     * Remove usuarios
-     *
-     * @param \Jazzyweb\AulasMentor\NotasFrontendBundle\Entity\Usuario $usuarios
-     */
-    public function removeUsuario(\Jazzyweb\AulasMentor\NotasFrontendBundle\Entity\Usuario $usuarios)
-    {
-        $this->usuarios->removeElement($usuarios);
-    }
-
-    /**
-     * Get usuarios
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUsuarios()
-    {
-        return $this->usuarios;
-    }
 }
