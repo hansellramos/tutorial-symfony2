@@ -4,6 +4,7 @@ namespace Jazzyweb\AulasMentor\NotasFrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Usuario
@@ -26,8 +27,8 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\MaxLength(255)
+     * @Assert\NotBlank(message="El nombre no puede éstar en blanco.")
+     * @Assert\Length(max=255)
      */
     private $nombre;
 
@@ -35,7 +36,7 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="apellidos", type="string", length=255)
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      */
     private $apellidos;
 
@@ -43,7 +44,7 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=255)
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      */
     private $salt;
 
@@ -51,8 +52,8 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\MaxLength(255)
+     * @Assert\NotBlank(message="El usuario no puede éstar en blanco.")
+     * @Assert\Length(max=255)
      * @Assert\Regex(
      *  pattern="/^[\w-]+$/",
      *  message="El nombre de usuario no puede contener más que caracteres alfanuméricos y guiones")
@@ -70,8 +71,8 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\MaxLength(255)
+     * @Assert\NotBlank(message="El email no puede éstar en blanco.")
+     * @Assert\Length(max=255)
      * @Assert\Email(message = "La dirección '{{ value }}' no es válida.")
      */
     private $email;
