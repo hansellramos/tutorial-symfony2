@@ -3,6 +3,7 @@
 namespace Jazzyweb\AulasMentor\NotasFrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Usuario
@@ -25,6 +26,8 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\MaxLength(255)
      */
     private $nombre;
 
@@ -32,6 +35,7 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="apellidos", type="string", length=255)
+     * @Assert\MaxLength(255)
      */
     private $apellidos;
 
@@ -39,6 +43,7 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=255)
+     * @Assert\MaxLength(255)
      */
     private $salt;
 
@@ -46,6 +51,11 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\MaxLength(255)
+     * @Assert\Regex(
+     *  pattern="/^[\w-]+$/",
+     *  message="El nombre de usuario no puede contener más que caracteres alfanuméricos y guiones")
      */
     private $username;
 
@@ -60,6 +70,9 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\MaxLength(255)
+     * @Assert\Email(message = "La dirección '{{ value }}' no es válida.")
      */
     private $email;
 
@@ -67,6 +80,7 @@ class Usuario
      * @var boolean
      *
      * @ORM\Column(name="isActive", type="boolean")
+     * @Assert\Type(type="bool", message="El valor {{ value }} debe ser {{ type }}.")
      */
     private $isActive;
 

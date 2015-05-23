@@ -149,46 +149,40 @@ class NotasController extends Controller {
     protected function dameEtiquetasYNotas() 
     {
         $session = $this->get('session');
+        $em = $this->getDoctrine()->getEntityManager();
 
-        $etiquetas = array(
-            array(
-                'id' => 1,
-                'texto' => 'etiqueta 1',
-            ),
-            array(
-                'id' => 2,
-                'texto' => 'etiqueta 2',
-            ),
-            array(
-                'id' => 3,
-                'texto' => 'etiqueta 3',
-            ),
-        );
+        $usuario = $em->getRepository('JazzywebAulasMentorNotasFrontendBundle:Usuario')
+                ->findOneByUsername('hansell.ramos');
 
-        $notas = array(
-            array(
-                'id' => 1,
-                'titulo' => 'nota 1',
-            ),
-            array(
-                'id' => 2,
-                'titulo' => 'nota 2',
-            ),
-            array(
-                'id' => 3,
-                'titulo' => 'nota 3',
-            ),
-        );
 
-        $nota_selecionada_id = $session->get('nota.seleccionada.id');
-        if (!$nota_selecionada_id) {
-            $nota_selecionada_id = 1;
+        $busqueda_tipo = $session->get('busqueda.tipo');
+
+        $busqueda_valor = $session->get('busqueda.valor');
+
+        // Etiquetas. Se pillan todas
+        $etiquetas = $em->getRepository('JazzywebAulasMentorNotasFrontendBundle:Etiqueta')->
+                findByUsuarioOrderedByTexto($usuario);
+
+        // Notas. Se pillan según el filtro almacenado en la sesión
+        if ($busqueda_tipo == 'por_etiqueta' && $busqueda_valor != 'todas') {
+            $notas = $em->getRepository('JazzywebAulasMentorNotasFrontendBundle:Nota')->
+                    findByUsuarioAndEtiqueta($usuario, $busqueda_valor);
+        } elseif ($busqueda_tipo == 'por_termino') {
+            $notas = $em->getRepository('JazzywebAulasMentorNotasFrontendBundle:Nota')->
+                    findByUsuarioAndTermino($usuario, $busqueda_valor);
+        } else {
+            $notas = $em->getRepository('JazzywebAulasMentorNotasFrontendBundle:Nota')->
+                    findByUsuarioOrderedByFecha($usuario);
         }
 
-        $nota_seleccionada = array(
-            'id' => $nota_selecionada_id,
-            'titulo' => 'nota ' . $nota_selecionada_id,
-        );
+
+        $nota_selecionada_id = $session->get('nota.seleccionada.id', '1');
+
+        $nota_seleccionada = $em
+                ->getRepository('JazzywebAulasMentorNotasFrontendBundle:Nota')
+                ->findOneById($nota_selecionada_id);
+
+
         return array($etiquetas, $notas, $nota_seleccionada);
     }
 

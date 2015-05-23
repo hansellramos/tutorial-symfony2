@@ -31,12 +31,6 @@
 
     <h1>Implementación de la lógica de control de la aplicación</h1>
 
-    {% if app.session.getFlash('mensaje') %}
-        <div id="etiquetas" class="marco mensaje">
-            <b>{{ app.session.getFlash('mensaje') }}</b>
-        </div>
-    {% endif %}
-
     <div id="etiquetas" class="marco">
         <h2>Listado de etiquetas</h2>
         <p>Siempre se muestran todas las etiquetas</b></p>
