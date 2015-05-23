@@ -4,6 +4,7 @@ namespace Jazzyweb\AulasMentor\NotasFrontendBundle\Controller;
 
  use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  use Jazzyweb\AulasMentor\NotasFrontendBundle\Entity\Usuario;
+ use Jazzyweb\AulasMentor\NotasFrontendBundle\Form\Type\UsuarioType;
 
  class EstudioValidacionYFormularioController extends Controller
  {
@@ -53,5 +54,24 @@ namespace Jazzyweb\AulasMentor\NotasFrontendBundle\Controller;
          return $this->render(
            'JazzywebAulasMentorNotasFrontendBundle:EstudioValidacionYFormulario:validaUsuario.html.twig',
            array('usuarios' => $usuarios));
+     }
+     
+     public function formUsuarioAction()
+     {
+         $usuario = new Usuario();
+
+         $usuario->setNombre('Alberto');
+         $usuario->setApellidos('Einstein');
+         $usuario->setEmail('albertopablo@kk.es');
+         $usuario->setIsActive(true);
+         $usuario->setUsername('alberto');
+         $usuario->setPassword('alberto');
+
+         $form = $this->createForm(new UsuarioType(), $usuario);
+
+         return $this->render(
+          'JazzywebAulasMentorNotasFrontendBundle:EstudioValidacionYFormulario:formUsuario.html.twig',
+           array('form' => $form->createView())
+         );
      }
  }
