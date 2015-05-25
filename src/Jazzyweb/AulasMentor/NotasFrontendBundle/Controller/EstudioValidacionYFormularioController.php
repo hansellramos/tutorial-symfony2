@@ -58,20 +58,26 @@ namespace Jazzyweb\AulasMentor\NotasFrontendBundle\Controller;
      
      public function formUsuarioAction()
      {
-         $usuario = new Usuario();
+        $request = $this->getRequest();
+        $usuario = new Usuario();
 
-         $usuario->setNombre('Alberto');
-         $usuario->setApellidos('Einstein');
-         $usuario->setEmail('albertopablo@kk.es');
-         $usuario->setIsActive(true);
-         $usuario->setUsername('alberto');
-         $usuario->setPassword('alberto');
+        $form = $this->createForm(new UsuarioType(), $usuario);
+        
+        if($request->getMethod() == 'POST')
+        {
+            $form->bind($request);
+            if ($form->isValid()) {
+                // Se procesa el formulario
 
-         $form = $this->createForm(new UsuarioType(), $usuario);
+                $this->get('session')->getFlashBag()->add('mensaje', 'El formulario era válido');
 
-         return $this->render(
-          'JazzywebAulasMentorNotasFrontendBundle:EstudioValidacionYFormulario:formUsuario.html.twig',
-           array('form' => $form->createView())
-         );
-     }
+                return $this->redirect($this->generateUrl('jamn_EVF_form_usuario'));
+            }
+        }
+
+        return $this->render(
+            'JazzywebAulasMentorNotasFrontendBundle:EstudioValidacionYFormulario:formUsuario.html.twig', 
+            array('form' => $form->createView())
+        );
+    }
  }

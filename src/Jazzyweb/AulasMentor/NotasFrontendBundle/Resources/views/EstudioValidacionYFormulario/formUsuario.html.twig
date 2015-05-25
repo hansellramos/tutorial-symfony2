@@ -4,14 +4,14 @@
 
  <h1>Como se pintan los formularios: El formulario usuario </h1>
  
-{% for flashMessage in app.session.flashbag.get('success') %}
+{% for flashMessage in app.session.flashbag.get('mensaje') %}
 <div style="background-color: rosybrown">
     {{ flashMessage }}
 </div>
 {% endfor %}
 
  <h2>La manera más rápida, pero con menos control sobre los widgets</h2>
- <form action="#" method="post" {{ form_enctype(form) }}>
+ <form novalidate="true" action="{{ path('jamn_EVF_form_usuario') }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
 
     <div>
