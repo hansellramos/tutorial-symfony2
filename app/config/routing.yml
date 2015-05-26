@@ -4,7 +4,7 @@ JAMNotasBackendBundle:
 
 JAMNotasFrontendBundle:
     resource: "@JazzywebAulasMentorNotasFrontendBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /notas
 
 jamab_alimentos:
     resource: "@JazzywebAulasMentorAlimentosBundle/Resources/config/routing.yml"
