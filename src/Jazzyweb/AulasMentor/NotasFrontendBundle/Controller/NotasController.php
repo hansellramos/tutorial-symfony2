@@ -149,10 +149,12 @@ class NotasController extends Controller {
     protected function dameEtiquetasYNotas() 
     {
         $session = $this->get('session');
+        
+//        var_dump($session->get('username'));die;
         $em = $this->getDoctrine()->getEntityManager();
 
         $usuario = $em->getRepository('JazzywebAulasMentorNotasFrontendBundle:Usuario')
-                ->findOneByUsername('hansell.ramos');
+                ->findOneByUsername('alberto');
 
 
         $busqueda_tipo = $session->get('busqueda.tipo');
