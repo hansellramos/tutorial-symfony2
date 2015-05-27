@@ -21,6 +21,16 @@ jamn_EVF:
 jamn_EVF_form_usuario:
  pattern: /estudio_valyforms/form_usuario
  defaults: { _controller: JazzywebAulasMentorNotasFrontendBundle:EstudioValidacionYFormulario:formUsuario }
+ 
+jamn_login:
+ pattern: /login
+ defaults: { _controller: JazzywebAulasMentorNotasFrontendBundle:Login:login }
+
+jamn_login_check:
+ pattern: /login_check
+
+jamn_logout:
+ pattern: /logout
 
 jamn_homepage:
      pattern:  /

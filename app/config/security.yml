@@ -7,8 +7,9 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_PREMIUM: [ ROLE_REGISTRADO ]
+        ROLE_REGISTRADO:       ROLE_USER
+        ROLE_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
@@ -45,13 +46,24 @@ security:
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
+        jamn_area_publica:
+            pattern: ^/notas/(registro|activar|tarifas|contratar|login$)
+            security: false
+        
         jamn_area_protegida:
             pattern: ^/notas/
-            http_basic:
-                realm: "Area protegida"
+            form_login:
+                login_path:  /notas/login
+                check_path:  /notas/login_check
+            logout:
+                path:   /notas/logout
+                target: /notas
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
     # http://symfony.com/doc/current/cookbook/security/access_control.html
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/notas/miespacio, roles: ROLE_PREMIUM }
+        - { path: ^/notas/administracion, roles: ROLE_ADMIN }
+        - { path: ^/notas, roles: ROLE_REGISTRADO }
