@@ -4,21 +4,24 @@ security:
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
+        Jazzyweb\AulasMentor\NotasFrontendBundle\Entity\Usuario: plaintext
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
         ROLE_PREMIUM: [ ROLE_REGISTRADO ]
-        ROLE_REGISTRADO:       ROLE_USER
-        ROLE_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory:
-            memory:
-                users:
-                    alberto:  { password: pruebas, roles: [ 'ROLE_REGISTRADO' ] }
-                    maria: { password: pruebas, roles: [ 'ROLE_PREMIUM' ] }
-                    miguel: { password: pruebas, roles: [ 'ROLE_ADMIN' ] }
+             users:
+               alberto:  { password: pruebas, roles: [ 'ROLE_REGISTRADO' ] }
+               maria: { password: pruebas, roles: [ 'ROLE_PREMIUM' ] }
+               miguel: { password: pruebas, roles: [ 'ROLE_ADMIN' ] }
+
+        base_datos:
+            entity: { class: JazzywebAulasMentorNotasFrontendBundle:Usuario, property: username }
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
@@ -39,6 +42,7 @@ security:
             # are route names and that they are specified in the AcmeDemoBundle
             form_login:
                 check_path: _demo_security_check
+                provider: base_datos
                 login_path: _demo_login
             logout:
                 path:   _demo_logout
@@ -65,5 +69,5 @@ security:
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         - { path: ^/notas/miespacio, roles: ROLE_PREMIUM }
-        - { path: ^/notas/administracion, roles: ROLE_ADMIN }
+        - { path: ^/notas/administracion, roles: ROLE_ADMIN, requires_channel: https }
         - { path: ^/notas, roles: ROLE_REGISTRADO }
