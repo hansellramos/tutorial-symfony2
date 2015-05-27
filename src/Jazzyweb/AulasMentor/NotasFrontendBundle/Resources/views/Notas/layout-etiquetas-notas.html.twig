@@ -29,7 +29,8 @@
 
 {% block body %}
     
-    <a href="{{path('jamn_logout')}}">Cerrar sesión </a>
+    
+    <p>Username: {{ app.user.username }} <a href="{{path('jamn_logout')}}">Cerrar sesión </a></p>
 
     <h1>Implementación de la lógica de control de la aplicación</h1>
     
